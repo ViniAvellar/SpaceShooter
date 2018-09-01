@@ -17,18 +17,26 @@ public class Player_Controller : MonoBehaviour {
 	private Rigidbody myRigidbody;
     private float nextfire;
     public float firerate;
+    private AudioSource somTiro;
+
+
+    // estado do jogador
+    
+
 	void Start()
 	{
 		myRigidbody = GetComponent<Rigidbody>();
+        somTiro = GetComponent<AudioSource>();
 	}
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && Time.time > nextfire)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextfire)
         {
             nextfire = Time.time + firerate;
             //Instantiate (opject, position, rotation);
             Instantiate(shot, shotspawn.position, shotspawn.rotation);
+            somTiro.Play();
         }
     }
 	void FixedUpdate()
